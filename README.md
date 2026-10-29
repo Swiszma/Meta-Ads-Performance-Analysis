@@ -53,8 +53,8 @@ The analysis had to answer:
   
 Strategic Note: early in the work, the data showed patterns no real advertising account produces. So I made checking the data itself the main objective: is this genuine platform data or synthetic data? Section 2 answers that question.
 
-### Data Sourcing and Integrity
-#### Prepare Phase
+## Data Sourcing and Integrity
+### Prepare Phase
 The dataset is a publicly available synthetic dataset modelled on the structure of Meta Ads data. It contains four linked tables: ad events (400,000 rows), users (9,841), ads (200) and campaigns (50), with a total campaign budget of $2,535,923.78.
 
 ROCCC Evaluation (Reliable, Original, Comprehensive, Current, Cited):
@@ -70,8 +70,8 @@ ROCCC Evaluation (Reliable, Original, Comprehensive, Current, Cited):
 - Microsoft Power BI: data import and cleaning in Power Query, a dedicated calendar table, DAX (Data Analysis Expressions) measures for every KPI (Key Performance Indicator), and an interactive dashboard comparing both platforms side by side.
 - MySQL (Workbench): an independent rebuild of the whole data model, load validation, and SQL queries that reproduce every dashboard number and test whether the data is real.
 
-### Data Engineering and Data Audit
-#### Process Phase
+## Data Engineering and Data Audit
+### Process Phase
 #### Step 1: Importing Safely
 Software often guesses what type of data a column holds, and a wrong guess can silently damage it. So every column type was set by hand. User IDs were kept as text, so an ID like 00062 keeps its zeros, and dates were read as day-month-year, so 4 June doesn't silently become 6 April.
 
@@ -86,8 +86,8 @@ Partial weeks: the first week has only 5 days of data and the last only 3, so th
 #### Step 3: The MySQL Rebuild
 The model was rebuilt from scratch in MySQL with exact money values (DECIMAL(10,2)), text-only IDs and dates converted on load. Eight checks confirmed the load was complete and correct, from the row counts to the total budget, accurate to the cent. 
 
-### Analysis and Findings
-#### Analyze Phase
+## Analysis and Findings
+### Analyze Phase
 Every result below was produced in Power BI and reproduced independently in MySQL, with identical numbers.
 
 1.	Facebook and Instagram perform the same. Every rate differs by less than half a percentage point. For example, the CTR (Click-Through Rate) is 11.76% on Facebook and 11.86% on Instagram.
@@ -101,8 +101,8 @@ Every result below was produced in Power BI and reproduced independently in MySQ
 [Find SQL Analysis and Queries Here](https://drive.google.com/file/d/1uVxUfNEoAuQ6WMhgNeR3YsIyV00lU4l7/view?usp=drive_link)
 
 
-### Powerbi Dashboard
-#### Share Phase
+## Powerbi Dashboard
+### Share Phase
 Below is a snapshot of the dashboard, with one page per platform.
 
 <img width="875" height="499" alt="image" src="https://github.com/user-attachments/assets/fd882a64-496d-4aa1-9202-c94666336be8" />
@@ -127,8 +127,8 @@ Below is a snapshot of the dashboard, with one page per platform.
 - Honest charts: the hourly chart starts at zero, so small random wobbles don't look like real peaks.
 - Native calendar heatmap: a custom matrix calendar shows activity day by day for the selected month.
 
-### Strategic Recommendations
-#### Act Phase
+## Strategic Recommendations
+### Act Phase
 #### Executive Summary (Final Conclusion)
 The dashboard is fully validated, but the data underneath it is synthetic. In this dataset, no platform, audience, format or time of day performs differently, and budget has no effect at all. The most valuable recommendation is therefore about checking data before trusting it:
 
