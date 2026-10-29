@@ -32,7 +32,7 @@ This documentation is divided into two sections on the same page:
 
 ## Section 1: The Project
 ### Project Overview and Business Task
-#### Ask Phase
+### Ask Phase
 This project analyzes three months of paid advertising data (7 May to 6 August 2025) covering 200 ads, 50 campaigns and 9,841 users across Facebook and Instagram. The goal was to help the marketing team decide where to focus its budget and creative effort.
 
 The analysis was designed around four stakeholders:
