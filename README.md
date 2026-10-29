@@ -65,17 +65,17 @@ ROCCC Evaluation (Reliable, Original, Comprehensive, Current, Cited):
 - Current (MEDIUM): recent, but May and August are only partial months.
 - Cited (MEDIUM): publicly available, but how it was generated isn't documented.
   
-##### Tools and Uses
+#### Tools and Uses
 
 - Microsoft Power BI: data import and cleaning in Power Query, a dedicated calendar table, DAX (Data Analysis Expressions) measures for every KPI (Key Performance Indicator), and an interactive dashboard comparing both platforms side by side.
 - MySQL (Workbench): an independent rebuild of the whole data model, load validation, and SQL queries that reproduce every dashboard number and test whether the data is real.
 
 ### Data Engineering and Data Audit
 #### Process Phase
-##### Step 1: Importing Safely
+#### Step 1: Importing Safely
 Software often guesses what type of data a column holds, and a wrong guess can silently damage it. So every column type was set by hand. User IDs were kept as text, so an ID like 00062 keeps its zeros, and dates were read as day-month-year, so 4 June doesn't silently become 6 April.
 
-##### Step 2: What the Audit Found
+#### Step 2: What the Audit Found
 346 damaged user IDs: before the data was published, the users file had been opened and saved in a spreadsheet program, which "corrected" some IDs. For example, 012e0 became 1.20E+01 and 00062 became 62. As a result, 20,046 events (5%) no longer match a user. They are labelled "Unknown" instead of being silently dropped.
   
 Two empty campaigns: two campaigns hold 152,872 of budget but have no ads,
@@ -83,10 +83,8 @@ so the average budget is calculated over the 48 active campaigns (49,646.91).
 
 Partial weeks: the first week has only 5 days of data and the last only 3, so their shorter bars in the weekly chart reflect the calendar, not a drop in activity.
   
-##### Step 3: The MySQL Rebuild
+#### Step 3: The MySQL Rebuild
 The model was rebuilt from scratch in MySQL with exact money values (DECIMAL(10,2)), text-only IDs and dates converted on load. Eight checks confirmed the load was complete and correct, from the row counts to the total budget, accurate to the cent. 
-
-See SQL Queries Here
 
 ### Analysis and Findings
 #### Analyze Phase
@@ -100,7 +98,7 @@ Every result below was produced in Power BI and reproduced independently in MySQ
 6.	Targeting has no effect. Ads aimed at women are seen by women exactly as often as ads aimed at everyone (34%).
 7.	There is no timing pattern. Activity is the same at 3 AM as at 8 PM, and the same on Sunday as on Monday.
    
-Find SQL Analysis and Queries Here
+[Find SQL Analysis and Queries Here](https://drive.google.com/file/d/1uVxUfNEoAuQ6WMhgNeR3YsIyV00lU4l7/view?usp=drive_link)
 
 
 ### Powerbi Dashboard
@@ -111,7 +109,7 @@ Below is a snapshot of the dashboard, with one page per platform.
 
 <img width="875" height="500" alt="image" src="https://github.com/user-attachments/assets/4df38877-c3e8-4680-b019-f2406828dfc0" />
 
-##### Abbreviations Used on the Dashboard:
+#### Abbreviations Used on the Dashboard:
 - CTR: Click-Through Rate (KPI card and matrix)
 - ER: Engagement Rate (matrix header)
 - CR: Conversion Rate (matrix header)
@@ -122,7 +120,7 @@ Below is a snapshot of the dashboard, with one page per platform.
 - Vs: versus, meaning "compared with" ("Vs Instagram" labels)
 - K / M: thousands / millions ($49.65K, $2.54M)
   
-##### Key Design Features:
+#### Key Design Features:
 
 - Side-by-side platform comparison: every KPI card shows how the platform compares with the other one (for example, "−0.11% Vs Instagram"), using DAX CALCULATE.
 - Dynamic measure switcher: one selector changes every chart between Impressions, Clicks, Engagements and the other counts.
@@ -152,7 +150,7 @@ The dashboard is fully validated, but the data underneath it is synthetic. In th
 ## Section 2: The Evidence
 ### The Approach
 I treated the data the way a fair court treats a defendant: assume it's genuine, then look for evidence strong enough to prove otherwise. For each test, I first asked what real advertising data would have to look like, then checked whether this data does. 
-See the SQL Queries Behind Each Test Here
+[See the SQL Queries Behind Each Test Here](https://drive.google.com/file/d/1uVxUfNEoAuQ6WMhgNeR3YsIyV00lU4l7/view?usp=drive_link)
 
 #### Things That Cannot Happen on a Real Platform
 1. Clicks From People Who Never Saw the Ad
